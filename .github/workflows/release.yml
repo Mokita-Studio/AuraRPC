@@ -1,0 +1,56 @@
+# Release: build AuraRPC.exe + Inno Setup installer + portable zip on
+# every vX.Y.Z tag, then publish a GitHub Release with all three.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+          check-latest: true
+          cache: true
+
+      - name: tests
+        run: go test -count=1 ./...
+
+      - name: build binary
+        # Stamp the running version from the tag so the in-app update check
+        # compares against the right baseline (the leading "v" is stripped
+        # at runtime by update.normalize).
+        run: go build -ldflags "-s -w -H windowsgui -X aurarpc/internal/update.CurrentVersion=${{ github.ref_name }}" -o AuraRPC.exe ./cmd/app
+
+      - name: install Inno Setup
+        run: choco install innosetup --no-progress -y
+
+      - name: build installer
+        run: |
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          $ver = "${{ github.ref_name }}" -replace '^v',''
+          & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" /DMyAppVersion=$ver scripts\installer.iss
+
+      - name: package portable zip
+        run: |
+          Compress-Archive -Path AuraRPC.exe,README.md,LICENSE `
+            -DestinationPath "dist\AuraRPC-${{ github.ref_name }}-portable.zip"
+
+      - name: stage raw binary
+        run: |
+          Copy-Item AuraRPC.exe "dist\AuraRPC-${{ github.ref_name }}.exe"
+
+      - name: create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.exe
+            dist/*.zip
+          generate_release_notes: true

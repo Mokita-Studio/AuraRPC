@@ -1,0 +1,39 @@
+# CI — vet + tests + build cross-check.
+# Disparadores: push a main y todos los PR.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+          check-latest: true
+          cache: true
+
+      - name: go vet
+        run: go vet ./...
+
+      - name: go test
+        run: go test -count=1 -race ./...
+
+      - name: go build (windowsgui)
+        run: go build -ldflags "-s -w -H windowsgui" -o AuraRPC.exe ./cmd/app
+
+      - name: upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: AuraRPC-windows-amd64
+          path: AuraRPC.exe
+          if-no-files-found: error
+          retention-days: 14

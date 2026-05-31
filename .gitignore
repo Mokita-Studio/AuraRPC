@@ -1,0 +1,34 @@
+# Binarios
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+/app.exe
+/dist/
+/build/
+
+# Test / coverage
+*.test
+*.out
+coverage.*
+/.gocache/
+/.gotmp/
+
+# Logs y datos locales
+debug.log
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Go
+vendor/
+
+# Notas locales (auditorías, scratch)
+/AuraRPC_Audit.txt
+/notes/
