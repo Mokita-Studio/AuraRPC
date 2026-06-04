@@ -55,7 +55,8 @@ opposite approach:
 5. Hit **Save** to keep the preset in your sidebar for next time.
 
 Closing the window doesn't quit the app — it keeps running in the tray.
-Right-click the tray icon to switch presets or disconnect.
+**Left-click** the tray icon to reopen the window; **right-click** for quick
+preset switching and disconnect.
 
 ---
 
@@ -93,6 +94,13 @@ background network activity.
 **Can I have more than one status?**
 Yes — save as many presets as you want and switch between them instantly from
 the tray menu.
+
+**The tray icon doesn't respond to clicks.**
+This usually happens when the icon is tucked into the hidden-icons overflow, or
+when a taskbar-customizing tool interferes. Try pinning AuraRPC to the taskbar
+(*Settings → Personalization → Taskbar → other system tray icons*). Either way,
+you can always reopen the window by launching AuraRPC again from its shortcut —
+it brings the running instance back to the front.
 
 **Does it work on Linux or macOS?**
 Windows for now. A Linux build is in the works.

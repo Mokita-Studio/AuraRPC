@@ -9,6 +9,7 @@ only; the user-facing README is available in English and Spanish.
 | -------- | ------- |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Package structure, dependencies, and concurrency model. |
 | [PROTOCOL.md](PROTOCOL.md) | Discord IPC format, handshake, SET_ACTIVITY, and reconnection. |
+| [TRAY.md](TRAY.md) | Tray click handling and Windows menu reliability (foreground patch). |
 | [BUILD.md](BUILD.md) | Compilation, PE resources, and packaging. |
 | [CONFIGURATION.md](CONFIGURATION.md) | Local structure, `config.json` / `presets.json` schema, and Windows registry. |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Development environment, code style, and PR workflow. |

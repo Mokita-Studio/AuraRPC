@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/getlantern/systray"
+	"fyne.io/systray"
 
 	"aurarpc/internal/core"
 	"aurarpc/internal/i18n"
@@ -60,6 +60,18 @@ func (t *Tray) onReady() {
 	systray.SetIcon(trayIcon(dark))
 	systray.SetTitle("AuraRPC")
 	systray.SetTooltip(t.l.T("tray.tooltip"))
+
+	// Left-click opens the window directly. This path does not invoke the
+	// native popup menu, so the window stays reachable even on setups where
+	// the right-click menu fails to display. Right-click still shows the menu;
+	// on the rare systems with a Windows foreground lock it can fail to appear,
+	// and the left-click path is the fallback (see docs/en/TRAY.md).
+	systray.SetOnTapped(func() {
+		log.Printf("tray: icon tapped, showing window")
+		if t.onShow != nil {
+			t.onShow()
+		}
+	})
 
 	t.statusItem = systray.AddMenuItem(t.l.T("status.disconnected"), "")
 	t.statusItem.Disable()

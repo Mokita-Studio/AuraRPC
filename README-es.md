@@ -55,8 +55,9 @@ ambas. AuraRPC hace lo contrario:
 4. Abre AuraRPC, pega el Application ID, rellena tus datos y pulsa **Conectar**.
 5. Pulsa **Guardar** para conservar el preset en tu barra lateral.
 
-Cerrar la ventana no cierra la app — sigue funcionando en la bandeja. Haz clic
-derecho en el icono para cambiar de preset o desconectar.
+Cerrar la ventana no cierra la app — sigue funcionando en la bandeja.
+**Clic izquierdo** en el icono para reabrir la ventana; **clic derecho** para
+el cambio rápido de presets y desconectar.
 
 ---
 
@@ -95,6 +96,13 @@ actividad de red en segundo plano.
 **¿Puedo tener más de un estado?**
 Sí — guarda tantos presets como quieras y cambia entre ellos al instante desde
 el menú de la bandeja.
+
+**El icono de la bandeja no responde a los clics.**
+Suele pasar cuando el icono está en los iconos ocultos, o cuando un programa que
+personaliza la barra de tareas interfiere. Prueba a anclar AuraRPC a la barra
+(*Configuración → Personalización → Barra de tareas → otros iconos de la bandeja*).
+En cualquier caso, siempre puedes reabrir la ventana ejecutando AuraRPC de nuevo
+desde su acceso directo — trae al frente la instancia que ya está corriendo.
 
 **¿Funciona en Linux o macOS?**
 Por ahora solo Windows. Una versión para Linux está en camino.
